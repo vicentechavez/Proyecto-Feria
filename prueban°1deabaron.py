@@ -1,5 +1,6 @@
 import cv2
 import tkinter as tk
+from tkinter import ttk # Import ttk for themed widgets
 from PIL import Image, ImageTk
 import threading
 import pygame
@@ -17,27 +18,44 @@ class DeteccionMovimientoApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Detector de Movimiento y Reconocimiento Facial")
-        self.root.geometry("700x550")
+        self.root.geometry("800x650") # Slightly larger window
         self.root.resizable(False, False)
 
-        self.frame_principal = tk.Frame(self.root)
-        self.frame_principal.pack()
+        # Apply a theme (optional, but makes it look more modern)
+        style = ttk.Style()
+        style.theme_use('clam') # 'clam', 'alt', 'default', 'classic' are common themes
+        style.configure('TFrame', background='#e0e0e0') # Light gray background for frames
+        style.configure('TButton', font=('Helvetica Neue', 10), padding=8, background='#4CAF50', foreground='white') # Green buttons
+        style.map('TButton', background=[('active', '#45a049')]) # Darker green on hover
+        style.configure('TLabel', font=('Helvetica Neue', 12), background="#f80d0d")
 
-        self.label_video = tk.Label(self.frame_principal)
-        self.label_video.pack()
 
-        self.frame_botones = tk.Frame(self.frame_principal)
-        self.frame_botones.pack(pady=10)
+        # --- Main Frame (with some padding and a subtle background) ---
+        self.frame_principal = ttk.Frame(self.root, padding=20, style='TFrame')
+        self.frame_principal.pack(expand=True, fill='both')
 
-        self.btn_iniciar = tk.Button(self.frame_botones, text="Iniciar Detección", command=self.iniciar)
-        self.btn_iniciar.grid(row=0, column=0, padx=5)
+        # --- Video Display Label ---
+        # Make the video label prominent, maybe with a border
+        self.label_video = tk.Label(self.frame_principal, bg="black", bd=2, relief="sunken")
+        self.label_video.pack(pady=10, fill='both', expand=True)
 
-        self.btn_detener = tk.Button(self.frame_botones, text="Detener", command=self.detener, state=tk.DISABLED)
-        self.btn_detener.grid(row=0, column=1, padx=5)
+        # --- Control Buttons Frame ---
+        self.frame_botones = ttk.Frame(self.frame_principal, padding=10, style='TFrame')
+        self.frame_botones.pack(pady=15) # More vertical padding
 
-        self.btn_registrar = tk.Button(self.frame_botones, text="Registrar Persona", command=self.registrar)
-        self.btn_registrar.grid(row=0, column=2, padx=5)
-        self.btn_registrar.config(state=tk.DISABLED)
+        # Use ttk.Button for themed buttons
+        self.btn_iniciar = ttk.Button(self.frame_botones, text="Iniciar Detección", command=self.iniciar, style='TButton')
+        self.btn_iniciar.grid(row=0, column=0, padx=10, pady=5)
+
+        self.btn_detener = ttk.Button(self.frame_botones, text="Detener", command=self.detener, state=tk.DISABLED, style='TButton')
+        self.btn_detener.grid(row=0, column=1, padx=10, pady=5)
+
+        self.btn_registrar = ttk.Button(self.frame_botones, text="Registrar Persona", command=self.registrar, state=tk.DISABLED, style='TButton')
+        self.btn_registrar.grid(row=0, column=2, padx=10, pady=5)
+
+        # --- Status Bar / Information Display (Optional but Recommended) ---
+        self.status_label = ttk.Label(self.root, text="Estado: Listo", anchor='w', font=('Helvetica Neue', 10), background='#c0c0c0', padding=5)
+        self.status_label.pack(side='bottom', fill='x')
 
         self.cap = None
         self.running = False
@@ -51,10 +69,10 @@ class DeteccionMovimientoApp:
 
     def inicializar_base_datos(self):
         self.conexion = mysql.connector.connect(
-            host="192.168.1.120",
-            user="prueba1",
-            password="",  # Agrega tu contraseña si aplica
-            database="seguridad"  # Cambia por el nombre real de tu base de datos
+            host="192.168.1.122",
+            user="ojodigital",
+            password="feria2025",  # Agrega tu contraseña si tiene
+            database="ojodigital"  # Reemplaza con el nombre real de tu base
         )
         self.cursor = self.conexion.cursor()
         self.cursor.execute("""
