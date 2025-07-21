@@ -1,0 +1,349 @@
+/* Verde neón más vibrante */
+:root {
+  --neon-green-base: #39ff14;  /* verde neón brillante */
+  --neon-green-light: #6eff56;
+  --neon-green-glow: #39ff14cc; /* con transparencia para glow */
+  --neon-green-glow-strong: #39ff1466; /* glow más fuerte */
+}
+
+body {
+  background-color: #0b0c0f;
+  color: var(--neon-green-light);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--neon-green-base);
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: #a6ff00;
+  text-shadow: 0 0 12px var(--neon-green-base), 0 0 25px var(--neon-green-base);
+  outline: none;
+}
+
+header {
+  background-color: #101214;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--neon-green-base);
+  box-shadow: 0 0 20px var(--neon-green-glow-strong);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--neon-green-base);
+  text-shadow:
+    0 0 8px var(--neon-green-base),
+    0 0 20px var(--neon-green-base),
+    0 0 30px var(--neon-green-base);
+  margin: 0;
+  user-select: none;
+}
+
+nav a {
+  margin-left: 30px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-shadow: 0 0 10px var(--neon-green-base);
+}
+
+nav a.active,
+nav a:hover {
+  color: var(--neon-green-light);
+  text-shadow:
+    0 0 10px var(--neon-green-light),
+    0 0 25px var(--neon-green-light),
+    0 0 40px var(--neon-green-light);
+}
+
+main {
+  max-width: 1000px;
+  margin: 40px auto 60px;
+  background-color: #121619;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow:
+    0 0 40px var(--neon-green-glow);
+  min-height: 70vh;
+}
+
+h2 {
+  color: var(--neon-green-base);
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow:
+    0 0 10px var(--neon-green-base),
+    0 0 25px var(--neon-green-base);
+}
+
+section.content,
+section#about-project,
+section#our-team,
+section#testimonials,
+section#project-progress {
+  margin-bottom: 40px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  background: #1d242c;
+  margin-bottom: 12px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow:
+    0 0 15px var(--neon-green-glow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  color: #b9ff3c;
+  font-weight: 600;
+}
+
+li:hover {
+  background-color: #273038;
+  box-shadow:
+    0 0 25px var(--neon-green-glow-strong);
+}
+
+.btn,
+button {
+  background-color: var(--neon-green-base);
+  color: #0b0c0f;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow:
+    0 0 20px var(--neon-green-glow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+}
+
+.btn:hover,
+button:hover {
+  background-color: var(--neon-green-light);
+  box-shadow:
+    0 0 35px var(--neon-green-glow-strong);
+}
+
+.team-member {
+  display: flex;
+  background-color: #1f2733;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow:
+    0 0 25px var(--neon-green-glow);
+  align-items: center;
+  color: var(--neon-green-light);
+}
+
+.team-member img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 25px;
+  box-shadow:
+    0 0 20px var(--neon-green-glow);
+  user-select: none;
+}
+
+.team-member h3 {
+  margin: 0 0 6px 0;
+  font-weight: 700;
+  color: var(--neon-green-base);
+  text-shadow:
+    0 0 15px var(--neon-green-base);
+}
+
+.team-member p {
+  margin: 3px 0;
+  font-size: 0.95rem;
+  color: #d6f27b;
+}
+
+.testimonial {
+  background-color: #1a1f2d;
+  border-left: 5px solid var(--neon-green-base);
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow:
+    0 0 25px var(--neon-green-glow);
+  font-style: italic;
+  color: #b9ff66;
+  user-select: text;
+}
+
+.testimonial footer {
+  text-align: right;
+  font-weight: 700;
+  color: #a0e020;
+  margin-top: 10px;
+}
+
+.progress {
+  margin-bottom: 20px;
+}
+
+.progress h3 {
+  margin-bottom: 8px;
+  color: var(--neon-green-base);
+}
+
+.progress-bar {
+  height: 18px;
+  background-color: var(--neon-green-base);
+  border-radius: 12px;
+  box-shadow:
+    0 0 15px var(--neon-green-glow);
+}
+
+.progress span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--neon-green-light);
+  font-weight: 600;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: none;
+  background-color: #1d232b;
+  color: var(--neon-green-light);
+  font-size: 1rem;
+  box-shadow:
+    inset 0 0 20px var(--neon-green-glow);
+  transition: box-shadow 0.3s ease;
+  resize: vertical;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form textarea:focus {
+  outline: none;
+  box-shadow:
+    0 0 28px var(--neon-green-glow-strong);
+  background-color: #26303b;
+}
+
+form textarea {
+  min-height: 120px;
+}
+
+footer {
+  background-color: #101214;
+  color: var(--neon-green-base);
+  text-align: center;
+  padding: 18px 20px;
+  font-weight: 600;
+  border-top: 2px solid var(--neon-green-base);
+  box-shadow:
+    0 0 20px var(--neon-green-glow-strong);
+  user-select: none;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    margin-top: 12px;
+  }
+
+  nav a {
+    margin-left: 0;
+    margin-right: 20px;
+  }
+
+  main {
+    margin: 20px 15px 40px;
+    padding: 25px 20px;
+  }
+
+  .team-member {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .team-member img {
+    margin: 0 0 15px 0;
+  }
+}
+body.dark-mode {
+  background-color: #e0ffd8;
+  color: #0a1a00;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-mode header,
+body.dark-mode footer,
+body.dark-mode main {
+  background-color: #c4ffc4;
+  color: #0a1a00;
+  box-shadow: none;
+  border-color: #56aa00;
+}
+
+body.dark-mode a {
+  color: #3c7d00;
+  text-shadow: none;
+}
+
+body.dark-mode a:hover {
+  color: #76c700;
+  text-shadow: none;
+}
+
+body.dark-mode .btn,
+body.dark-mode button {
+  background-color: #5faa00;
+  color: #e0ffd8;
+  box-shadow: none;
+}
+
+body.dark-mode .btn:hover,
+body.dark-mode button:hover {
+  background-color: #76c700;
+  box-shadow: none;
+}
+
+/* Opcional: eliminar glow neón para modo claro para comodidad */
+body.dark-mode .team-member,
+body.dark-mode .testimonial,
+body.dark-mode .progress-bar,
+body.dark-mode li {
+  box-shadow: none;
+}

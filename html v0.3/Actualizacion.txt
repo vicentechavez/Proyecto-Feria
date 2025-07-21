@@ -1,0 +1,1 @@
+agrega scripts, mejor css, y mejor estructura para moviles
