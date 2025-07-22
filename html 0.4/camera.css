@@ -1,0 +1,143 @@
+/* camara.css - Estilos neon para la vista de la cámara */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #000;
+  color: #39ff14;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+h1 {
+  color: #39ff14;
+  text-shadow:
+    0 0 5px #39ff14,
+    0 0 10px #39ff14,
+    0 0 20px #39ff14,
+    0 0 40px #0f0;
+  margin-bottom: 20px;
+}
+
+button {
+  background: transparent;
+  border: 2px solid #39ff14;
+  color: #39ff14;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow:
+    0 0 5px #39ff14,
+    0 0 10px #39ff14,
+    0 0 20px #39ff14;
+  transition: 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin: 0 10px;
+}
+
+button:hover {
+  background: #39ff14;
+  color: #000;
+  box-shadow:
+    0 0 10px #39ff14,
+    0 0 20px #39ff14,
+    0 0 30px #39ff14,
+    0 0 40px #0f0;
+}
+
+video {
+  border: 4px solid #39ff14;
+  border-radius: 15px;
+  box-shadow:
+    0 0 10px #39ff14,
+    0 0 20px #0f0;
+  max-width: 100%;
+  display: block;
+  margin: 20px auto;
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #0f0;
+  text-align: center;
+  text-shadow: 0 0 5px #0f0;
+}
+
+.neon-text {
+  animation: neonPulse 2s infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #39ff14,
+      0 0 10px #39ff14,
+      0 0 20px #39ff14,
+      0 0 40px #0f0;
+  }
+  50% {
+    text-shadow:
+      0 0 10px #39ff14,
+      0 0 20px #39ff14,
+      0 0 30px #39ff14,
+      0 0 50px #0f0;
+  }
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.menu.hidden {
+  display: none;
+}
+
+.menu.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.menu:not(.open) {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.menu-icon {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #39ff14;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon.open {
+  transform: rotate(360deg);
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cámara</title>
+  <link rel="stylesheet" href="camera.css">
+</head>
+<body>
+  <!-- Menú -->
+  <div id="nav-container"></div>
+
+  <div class="container">
+    <h1 class="neon-text">Cámara en Vivo</h1>
+    
+    <video id="video" autoplay playsinline></video>
+
+    <div style="margin-top: 20px;">
+      <button onclick="iniciarCamara()">Iniciar Cámara</button>
+      <button onclick="detenerCamara()">Detener Cámara</button>
+    </div>
+  </div>
+
+  <footer>
+    Proyecto con acceso a cámara - HTML5 + JS
+  </footer>
+
+  <script src="menu.js"></script>
+  <script src="camara.js"></script>
+</body>
+</html>
