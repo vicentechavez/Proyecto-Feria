@@ -1,0 +1,15 @@
+inicio de sesion piola
+registro, iniciar, contraseña
+reconocimiento
+boton para descargar aplicacion, variedad (como funciona)
+quienes somos:
+fotos (detalles)
+agregar insignificantes
+no mantener camara
+funciones
+precios:
+2 variantes
+precio mayor con ia
+precio menor con chat
+usar firebase y gemini.
+usar diseño v1, 
