@@ -1,0 +1,55 @@
+/* ====================================================== */
+/* ||          ESTILOS PARA LA PÁGINA DE GALERÍA       || */
+/* ====================================================== */
+
+.gallery-grid {
+    display: grid;
+    /* Crea una cuadrícula flexible que se ajusta al tamaño de la pantalla */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px; /* Espacio entre las imágenes */
+    margin-top: 40px;
+}
+
+.gallery-item {
+    position: relative; /* Necesario para posicionar el título sobre la imagen */
+    border-radius: 12px;
+    overflow: hidden; /* Oculta las esquinas de los elementos que se salgan */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(157, 0, 255, 0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin deformarse */
+    display: block; /* Elimina un pequeño espacio extra debajo de la imagen */
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1); /* Efecto de zoom sutil al pasar el mouse */
+}
+
+.image-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* Fondo con gradiente para que el texto sea legible */
+    background: linear-gradient(to top, rgba(16, 16, 26, 1), transparent);
+    color: white;
+    text-align: center;
+    padding: 30px 15px 15px 15px;
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.1em;
+    /* Transición suave para la opacidad del título */
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}

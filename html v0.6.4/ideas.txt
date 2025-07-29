@@ -1,0 +1,19 @@
+inicio de sesion piola (Hecho)
+registro, iniciar, contraseña (Hecho)
+reconocimiento (Hecho)
+boton para descargar aplicacion, variedad (como funciona)(Hecho)
+quienes somos:
+fotos (detalles)
+agregar insignificantes (Hecho)
+no mantener camara (Hecho)
+funciones (Hecho)
+precios: (Hecho)
+2 variantes (Hecho)
+precio mayor con ia(Hecho)
+precio menor con chat(Hecho)
+usar firebase y gemini.(Hecho)
+usar diseño v1(Hecho)
+inspiracion pagina de mach(Hecho)
+ocupar db(Hecho)
+azzokavvalent@gmail.com
+vvwwallent0777

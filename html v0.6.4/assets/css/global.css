@@ -1,0 +1,224 @@
+:root {
+    --primary-color: #00ff7f; /* Verde Neón (SpringGreen) */
+    --secondary-color: #9d00ff; /* Morado Neón */
+    --dark-bg: #10101a;
+    --content-bg: rgba(26, 26, 40, 0.7);
+    --text-color: #e0e0e0;
+    --heading-color: #ffffff;
+    --border-color: rgba(157, 0, 255, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.7;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+h2 {
+    font-size: 2.8em;
+    color: var(--heading-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+p { max-width: 700px; margin: 0 auto 20px; text-align: center; font-size: 1.1em; }
+.neon-green { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-color); }
+.neon-purple { color: var(--secondary-color); text-shadow: 0 0 8px var(--secondary-color); }
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(16, 16, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.nav-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--heading-color);
+    text-shadow: 0 0 5px var(--primary-color);
+}
+.nav-menu { display: flex; list-style: none; gap: 2.5rem; }
+.nav-link { color: var(--text-color); transition: color 0.3s, text-shadow 0.3s; }
+.nav-link:hover { color: var(--primary-color); text-shadow: 0 0 5px var(--primary-color); }
+
+/* Botones */
+.btn {
+    padding: 12px 24px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 15px var(--primary-color); }
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-secondary:hover { background-color: var(--primary-color); color: var(--dark-bg); }
+
+/* Footer */
+footer { text-align: center; padding: 30px; margin-top: 40px; border-top: 1px solid var(--border-color); }
+
+/* Responsive y Modal se mantienen como en la respuesta anterior */
+.hamburger { display: none; }
+@media (max-width: 768px) {
+    .nav-menu { display: none; /* Simplificado por brevedad */ }
+    .hamburger { display: block; /* Simplificado */ }
+}
+
+/* ====================================================== */
+/* ||      NUEVO ESTILO MODERNO PARA EL MODAL          || */
+/* ====================================================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(16, 16, 26, 0.85);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: #1e1e2c; /* Fondo oscuro sólido y elegante */
+    padding: 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    color: #fff;
+    text-align: center;
+}
+
+.modal-content h3 {
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.modal-content p {
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 1em;
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.close-btn:hover { color: white; }
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.modal-content input {
+    background: #2a2a3a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 14px;
+    color: #fff;
+    font-size: 1em;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+}
+
+.modal-content .btn-primary {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+.form-toggle-text {
+    margin-top: 25px;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.form-toggle-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+.form-toggle-text a:hover { text-decoration: underline; }
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: white;
+}
+/* --- Estilos para la vista de Autenticación en el Header --- */
+.nav-auth {
+    display: flex;
+    align-items: center;
+}
+
+#logged-in-view {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio entre el email y el botón */
+}
+
+.user-email {
+    color: var(--text-color);
+    font-weight: 700;
+    /* Efecto neón sutil para el texto */
+    text-shadow: 0 0 3px var(--primary-color);
+}
