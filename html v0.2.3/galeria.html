@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galería - Ojo Digital</title>
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/galeria.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-logo">Ojo Digital</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="servicios.html" class="nav-link">Servicios</a></li>
+                <li class="nav-item"><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li class="nav-item"><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-auth">
+                <button id="login-btn" class="btn btn-secondary">Iniciar Sesión</button>
+                <button id="register-btn" class="btn btn-primary">Registrarse</button>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container">
+            <h2>Galería <span class="neon-purple">Visual</span> de Ojo Digital</h2>
+            <p>Descubre cómo nuestra tecnología de vigilancia transforma la seguridad.</p>
+            <div class="gallery-grid">
+                 <img src="https://via.placeholder.com/400x300/00FF00/10101a?Text=Vigilancia+IA" alt="Vigilancia con IA">
+                 <img src="https://via.placeholder.com/400x300/A020F0/FFFFFF?Text=Interfaz+Usuario" alt="Interfaz de usuario intuitiva">
+                 <img src="https://via.placeholder.com/400x300/00FF00/10101a?Text=Seguridad+Hogar" alt="Seguridad para el hogar">
+                 <img src="https://via.placeholder.com/400x300/A020F0/FFFFFF?Text=Vigilancia+Empresarial" alt="Vigilancia empresarial">
+                 <img src="https://via.placeholder.com/400x300/00FF00/10101a?Text=App+Movil" alt="Control desde la app móvil">
+                 <img src="https://via.placeholder.com/400x300/A020F0/FFFFFF?Text=Camaras+Inteligentes" alt="Cámaras de seguridad inteligentes">
+                 <img src="https://via.placeholder.com/400x300/00FF00/10101a?Text=Analisis+en+Vivo" alt="Análisis de video en tiempo real">
+                 <img src="https://via.placeholder.com/400x300/A020F0/FFFFFF?Text=Alertas+Instantaneas" alt="Alertas instantáneas">
+                 <img src="https://via.placeholder.com/400x300/00FF00/10101a?Text=Privacidad" alt="Privacidad garantizada">
+                 <img src="https://via.placeholder.com/400x300/A020F0/FFFFFF?Text=Conexion+Segura" alt="Conexión segura y encriptada">
+                 <img src="https://via.placeholder.com/400x300/00FF00/10101a?Text=Integracion+Facil" alt="Fácil integración de dispositivos">
+                 <img src="https://via.placeholder.com/400x300/A020F0/FFFFFF?Text=Tecnologia+Avanzada" alt="Tecnología de vigilancia avanzada">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ojo Digital. Tu Visión de Seguridad.</p>
+    </footer>
+
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <form id="login-form">
+                <h3>Iniciar Sesión</h3>
+                <input type="email" id="login-email" placeholder="Correo electrónico" required>
+                <input type="password" id="login-password" placeholder="Contraseña" required>
+                <button type="submit" class="btn btn-primary">Iniciar</button>
+            </form>
+            <form id="register-form" style="display:none;">
+                <h3>Crear Cuenta</h3>
+                <input type="email" id="register-email" placeholder="Correo electrónico" required>
+                <input type="password" id="register-password" placeholder="Contraseña" required>
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+            </form>
+            <p id="form-toggle">¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyB2EpmIawHud-1vxXYF-O6apCaUz9MMXbY",
+            authDomain: "ojodigitalproject.firebaseapp.com",
+            projectId: "ojodigitalproject",
+            storageBucket: "ojodigitalproject.appspot.com",
+            messagingSenderId: "728880932782",
+            appId: "1:728880932782:web:683d5264d2febe0ce8ca3f",
+            measurementId: "G-XYY1H6B152"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

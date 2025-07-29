@@ -1,0 +1,139 @@
+/* --- HERO SECTION --- */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative; /* Necesario para posicionar los pseudo-elementos */
+    overflow: hidden; /* Evita que las luces se salgan del contenedor */
+}
+
+/* Pseudo-elementos que crean el fondo de aurora animado */
+.hero::before,
+.hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    /* El filtro blur es la clave para el efecto de luz suave */
+    filter: blur(120px);
+    z-index: -1; /* Los coloca detrás del contenido del hero */
+}
+
+/* Orbe de luz morado */
+.hero::before {
+    width: 450px;
+    height: 450px;
+    background: rgba(157, 0, 255, 0.25);
+    /* Animación para el movimiento */
+    animation: float-purple 18s infinite alternate ease-in-out;
+}
+
+/* Orbe de luz verde */
+.hero::after {
+    width: 350px;
+    height: 350px;
+    background: rgba(0, 255, 127, 0.25);
+    /* Animación diferente para un movimiento asincrónico */
+    animation: float-green 24s infinite alternate ease-in-out;
+}
+
+/* Keyframes que definen el movimiento de las luces */
+@keyframes float-purple {
+    from { transform: translate(-20%, -20%) rotate(0deg); }
+    to { transform: translate(20%, 20%) rotate(360deg); }
+}
+
+@keyframes float-green {
+    from { transform: translate(20%, 20%) rotate(0deg); }
+    to { transform: translate(-20%, -20%) rotate(360deg); }
+}
+
+.hero h1 {
+    font-size: 4em;
+    font-weight: 700;
+    max-width: 800px;
+    /* Sombra de texto sutil para mejorar la legibilidad sobre el fondo animado */
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.hero .tagline {
+    font-size: 1.3em;
+    color: var(--text-color);
+    margin-bottom: 40px;
+}
+.hero-buttons .btn {
+    margin: 0 10px;
+}
+
+
+/* --- SECCIÓN 'CÓMO FUNCIONA' --- */
+#como-funciona {
+    /* Fondo con efecto de vidrio esmerilado */
+    background: rgba(26, 26, 40, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feature-item {
+    background: transparent; /* Fondo transparente para que funcione el backdrop-filter de la sección */
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    /* Borde que aparecerá en hover */
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.feature-item:hover {
+    border-color: rgba(157, 0, 255, 0.5); /* El borde se ilumina */
+}
+
+.feature-icon {
+    /* 1. Define el fondo que quieres mostrar a través del texto */
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+
+    /* 2. Propiedad para navegadores WebKit (Chrome, Safari, Edge) */
+    -webkit-background-clip: text;
+
+    /* 3. Propiedad estándar (esto elimina la advertencia) */
+    background-clip: text;
+
+    /* 4. Hacemos el color del texto transparente (para WebKit) */
+    -webkit-text-fill-color: transparent;
+
+    /* 5. Fallback estándar para hacer el texto transparente */
+    color: transparent;
+
+    /* Tus otros estilos... */
+    font-size: 3em;
+    line-height: 1;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover .feature-icon {
+    transform: scale(1.1);
+    animation: icon-pulse 1s ease-in-out;
+}
+
+@keyframes icon-pulse {
+    50% { filter: brightness(2); }
+}
+
+.feature-item h3 {
+    font-size: 1.5em;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+.feature-item p {
+    font-size: 1em;
+}
