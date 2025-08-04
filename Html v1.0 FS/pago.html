@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesar Pago - Ojo Digital</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/pago.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-box">
+            <a href="index.html" class="nav-logo" style="justify-content: center; margin-bottom: 20px;">
+                <img src="assets/img/logo.png" alt="Ojo Digital Logo" class="logo-image">
+                Ojo Digital
+            </a>
+            <h2 id="payment-title">Contratar Plan</h2>
+            <p class="disclaimer">Estás en un entorno de pago simulado.</p>
+            
+            <form id="payment-form">
+                <div class="input-group">
+                    <label for="card-number">Número de Tarjeta</label>
+                    <input type="text" id="card-number" placeholder="**** **** **** ****" required maxlength="19">
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="expiry-date">Fecha Exp.</label>
+                        <input type="text" id="expiry-date" placeholder="MM/AA" required maxlength="5">
+                    </div>
+                    <div class="input-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required maxlength="3">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="card-name">Nombre en la Tarjeta</label>
+                    <input type="text" id="card-name" placeholder="Nombre Apellido" required maxlength="40">
+                </div>
+
+                <p class="warning-message">
+                    <span class="warning-icon">⚠️</span> No guardaremos esta información. Es solo una simulación.
+                </p>
+
+                <button type="submit" class="btn btn-primary">Pagar Ahora</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pantalla de Carga -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Verificando...</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Lógica para obtener el plan de la URL ---
+            const params = new URLSearchParams(window.location.search);
+            const plan = params.get('plan') || 'Desconocido';
+            
+            const paymentTitle = document.getElementById('payment-title');
+            paymentTitle.innerHTML = `Contratar Plan <span class="neon-green">${plan}</span>`;
+
+            // --- Lógica del formulario de pago con simulación de carga ---
+            const paymentForm = document.getElementById('payment-form');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            
+            paymentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Mostrar la pantalla de carga
+                loadingOverlay.style.display = 'flex';
+
+                // Simular un retraso aleatorio entre 1 y 10 segundos
+                const randomDelay = Math.floor(Math.random() * 9001) + 1000;
+
+                setTimeout(() => {
+                    // Ocultar la pantalla de carga
+                    loadingOverlay.style.display = 'none';
+
+                    // Abrir la página de agradecimiento en una nueva pestaña
+                    window.open('gracias.html', '_blank');
+
+                    // Redirigir a la página de inicio después de un breve retraso
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 500);
+                }, randomDelay);
+            });
+
+            // --- Mejoras en la experiencia de usuario del formulario ---
+            const cardNumberInput = document.getElementById('card-number');
+            const expiryDateInput = document.getElementById('expiry-date');
+            const cvvInput = document.getElementById('cvv');
+
+            // Formatear automáticamente el número de tarjeta con espacios
+            cardNumberInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
+                let formattedValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                e.target.value = formattedValue;
+            });
+
+            // Solo permitir números en el CVV
+            cvvInput.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+
+            // Formatear automáticamente la fecha de expiración (MM/AA)
+            expiryDateInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/[^0-9]/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+        });
+    </script>
+</body>
+</html>

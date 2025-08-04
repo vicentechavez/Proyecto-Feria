@@ -1,0 +1,43 @@
+azzokavvalent@gmail.com
+vvwwallent0777
+
+
+pedirle a gemini que haga esto en el codigo de mysql
+
+"Hola Gemini,
+
+Necesito que realices una serie de mejoras y agregues funcionalidades a mi sitio web 'Ojo Digital'. Aquí está el listado completo de lo que necesito:
+
+1. Mejoras en la Página de Pago y Flujo de Compra:
+
+Formato de campos: En el formulario de pago.html:
+
+Formatea el campo del número de tarjeta para que añada un espacio automáticamente cada 4 dígitos.
+
+Limita la longitud del campo "Nombre en la Tarjeta" a un máximo de 40 caracteres.
+
+Limita el campo de fecha de vencimiento a 5 caracteres (MM/AA) y el del CVV a 3.
+
+Simulación de Carga: Al presionar "Pagar Ahora", implementa una pantalla de carga con un spinner y el texto "Verificando...". Esta debe durar un tiempo aleatorio entre 1 y 10 segundos antes de completar la acción.
+
+2. Lógica de Planes y Autenticación:
+
+Plan de Prueba: En la página servicios.html, agrega un "Plan de Prueba" gratuito de 7 días.
+
+Requisito de Inicio de Sesión: Impide que cualquier usuario contrate un plan (incluido el de prueba) si no ha iniciado sesión.
+
+Flujo para Usuarios no Autenticados: Si un usuario sin sesión intenta contratar un plan, muéstrale una notificación que diga "Debes iniciar sesión para seguir" y abre automáticamente el modal de inicio de sesión.
+
+Flujo del Plan de Prueba: Cuando un usuario que sí ha iniciado sesión elija el "Plan de Prueba", debe saltarse la página de pago y ser redirigido directamente a una página de confirmación.
+
+3. Mejoras Generales de Interfaz y Experiencia:
+
+Separación de Botones: En la barra de navegación de todo el sitio, añade una separación visual entre los botones "Iniciar Sesión" y "Registrarse".
+
+Enlace en el Footer: En el pie de página de todo el sitio, agrega un enlace titulado "Más información sobre el proyecto".
+
+Página de "Gracias" Dinámica: Adapta la página gracias.html para que muestre un mensaje de bienvenida a la prueba si el usuario activó el plan gratuito, y un mensaje de agradecimiento por la compra si contrató un plan de pago.
+
+4. Organización del Código:
+
+Refactorización de CSS: Elimina todas las etiquetas <style> que están directamente en los archivos HTML y mueve esas reglas a los archivos .css externos para mantener el código limpio, organizado y centralizado."

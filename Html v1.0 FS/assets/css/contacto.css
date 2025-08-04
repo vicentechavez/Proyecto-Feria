@@ -1,0 +1,112 @@
+.contact-wrapper {
+    display: flex;
+    gap: 40px;
+    background: var(--content-bg);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+.contact-form { flex: 2; }
+.contact-info { flex: 1; text-align: left; }
+.contact-info h3, .contact-info h4 { color: var(--primary-color); }
+.contact-info p { text-align: left; margin-bottom: 15px; }
+
+/* -- REGLA AÑADIDA PARA CORREGIR EL DISEÑO -- */
+#main-contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background: #10101a;
+    color: white;
+    font-size: 1rem;
+}
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary-color); outline: none; }
+
+/* Se ha añadido una transición al botón para consistencia */
+.contact-form .btn {
+    transition: all 0.3s ease;
+}
+
+
+#our-team { margin-top: 60px; }
+
+/* --- ESTILOS PARA LA PIRÁMIDE DEL EQUIPO --- */
+.pyramid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Espacio entre las filas de la pirámide */
+    margin-top: 40px;
+}
+
+.pyramid-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que se ajuste en pantallas pequeñas */
+    gap: 30px; /* Espacio entre miembros de la misma fila */
+}
+
+.pyramid-member-card {
+    background: var(--content-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    width: 320px; /* Ancho fijo para las tarjetas */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pyramid-member-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(157, 0, 255, 0.2);
+}
+
+.pyramid-member-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.pyramid-member-card h3 {
+    color: var(--heading-color);
+    font-size: 1.4em;
+}
+
+.pyramid-member-card .role {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-top: 5px;
+    font-size: 1.1em;
+}
+
+.pyramid-member-card .detail {
+    font-size: 0.95em;
+    color: var(--text-color);
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+/* Diseño responsivo para móviles */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        flex-direction: column;
+        gap: 30px; /* Reducido el espacio para vista móvil */
+    }
+    .pyramid-row {
+        flex-direction: column; /* Apila las tarjetas verticalmente */
+        align-items: center;
+    }
+    .pyramid-member-card {
+        width: 90%; /* Ocupa casi todo el ancho */
+        max-width: 400px;
+    }
+}

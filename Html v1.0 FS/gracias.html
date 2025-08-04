@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias! - Ojo Digital</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/pago.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="thank-you-box">
+            <img src="assets/img/logo.png" alt="Ojo Digital Logo" class="logo-image">
+            <h1 id="thank-you-title">¡<span class="neon-green">Gracias</span> por tu compra!</h1>
+            <p id="thank-you-message">Hemos procesado tu pago. Ya puedes descargar nuestra aplicación para empezar a proteger lo que más importa.</p>
+            <a href="#" class="btn btn-primary">Descargar Aplicación</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const plan = params.get('plan');
+
+            if (plan === 'Prueba') {
+                const title = document.getElementById('thank-you-title');
+                const message = document.getElementById('thank-you-message');
+
+                title.innerHTML = '¡Tu <span class="neon-green">prueba</span> ha comenzado!';
+                message.textContent = 'Ya puedes disfrutar de 7 días de Ojo Digital. Descarga nuestra aplicación para empezar a proteger lo que más importa.';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+/* ====================================================== */
+/* ||          ESTILOS PARA LA PÁGINA DE INICIO        || */
+/* ====================================================== */
+
+/* --- HERO SECTION --- */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 20px;
+}
+
+.hero::before,
+.hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+}
+
+.hero::before {
+    width: 450px;
+    height: 450px;
+    background: rgba(157, 0, 255, 0.25);
+    animation: float-purple 18s infinite alternate ease-in-out;
+}
+
+.hero::after {
+    width: 350px;
+    height: 350px;
+    background: rgba(0, 255, 127, 0.25);
+    animation: float-green 24s infinite alternate ease-in-out;
+}
+
+@keyframes float-purple {
+    from { transform: translate(-20%, -20%) rotate(0deg); }
+    to { transform: translate(20%, 20%) rotate(360deg); }
+}
+
+@keyframes float-green {
+    from { transform: translate(20%, 20%) rotate(0deg); }
+    to { transform: translate(-20%, -20%) rotate(360deg); }
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
+    max-width: 800px;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.hero .tagline {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-bottom: 40px;
+}
+
+.hero-buttons .btn {
+    margin: 0 10px;
+}
+
+/* --- SECCIÓN 'CÓMO FUNCIONA' --- */
+#como-funciona {
+    background: rgba(26, 26, 40, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feature-item {
+    background: transparent;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.feature-item:hover {
+    border-color: rgba(157, 0, 255, 0.5);
+}
+
+.feature-icon {
+    font-size: 3em;
+    line-height: 1;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover .feature-icon {
+    transform: scale(1.1);
+    animation: icon-pulse 1s ease-in-out;
+}
+
+@keyframes icon-pulse {
+    50% { filter: brightness(2); }
+}
+
+.feature-item h3 {
+    font-size: 1.5em;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 1em;
+}
