@@ -1,0 +1,5 @@
+azzokavvalent@gmail.com
+vvwwallent0777
+
+Para funcionar, mover la carpeta a:
+C:\xampp\htdocs\html_v1.0_MYSQL
