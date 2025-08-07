@@ -49,11 +49,19 @@ class MainApplication:
         self.recognition_timer = None
         self.last_unknown_capture_time = 0
         self.unknown_capture_cooldown = 30
+        self.last_db_update_timestamp = None # Para la sincronización
 
         self.configurar_estilos()
         self.crear_widgets_principales()
-        self.reload_data_from_db()
+        self.reload_data_from_db(is_initial_load=True)
         self.log_app_startup()
+
+        # Iniciar el sondeo de la base de datos en segundo plano
+        self.db_poll_thread = threading.Thread(target=self._poll_database_for_updates, daemon=True)
+        self.db_poll_thread.start()
+
+        # Evento personalizado para recargar datos desde el hilo de sondeo
+        self.root.bind("<<DataChanged>>", self.on_data_changed_event)
 
         self.root.protocol("WM_DELETE_WINDOW", self.cerrar_aplicacion)
 
@@ -157,10 +165,39 @@ class MainApplication:
         self.status_label = ttk.Label(self.root, text="Estado: Listo", anchor='w', padding=5, style='Estado.TLabel')
         self.status_label.grid(row=1, column=0, columnspan=2, sticky='ew')
 
-    def reload_data_from_db(self):
+    def _poll_database_for_updates(self):
+        """Función que corre en un hilo para revisar cambios en la BD."""
+        poll_db_handler = DatabaseHandler(config.DB_CONFIG)
+        while self.running:
+            try:
+                current_timestamp = poll_db_handler.get_system_update_timestamp()
+                if current_timestamp and (self.last_db_update_timestamp is None or current_timestamp > self.last_db_update_timestamp):
+                    print(f"🔄 Cambio detectado en la base de datos. Timestamp: {current_timestamp}")
+                    self.last_db_update_timestamp = current_timestamp
+                    # Generar un evento virtual para que el hilo principal lo maneje
+                    self.root.event_generate("<<DataChanged>>", when="tail")
+            except Exception as e:
+                print(f"Error en el sondeo de la BD: {e}")
+                poll_db_handler.reconnect() # Intentar reconectar
+            
+            time.sleep(5) # Esperar 5 segundos antes de la siguiente revisión
+        
+        poll_db_handler.close()
+        print("🛑 Hilo de sondeo de base de datos detenido.")
+
+    def on_data_changed_event(self, event):
+        """Manejador para el evento de cambio de datos."""
+        print("Evento <<DataChanged>> recibido. Recargando datos...")
+        self.reload_data_from_db()
+
+    def reload_data_from_db(self, is_initial_load=False):
         self.status_label.config(text="Estado: Sincronizando datos...")
         self.datos_registrados, self.encodings_registrados = self.db_handler.get_all_registered_data()
-        self.db_handler.update_system_status()
+        
+        if is_initial_load:
+            # En la carga inicial, obtenemos el timestamp actual
+            self.last_db_update_timestamp = self.db_handler.get_system_update_timestamp()
+        
         self.status_label.config(text=f"Estado: Listo. {len(self.encodings_registrados)} personas registradas.")
         print(f"✅ Datos recargados. {len(self.encodings_registrados)} rostros en memoria.")
 
@@ -173,7 +210,6 @@ class MainApplication:
             self.btn_iniciar.config(state=tk.DISABLED); self.btn_detener.config(state=tk.NORMAL)
             self.status_label.config(text="Estado: Detección activa.")
             
-            # Actualizar panel de estado de IA
             self.status_ia_line1.config(text="Cámara Activa", fg="#55ff55")
             self.status_ia_line2.config(text="Modo: Reconocimiento")
 
@@ -190,7 +226,6 @@ class MainApplication:
         self.btn_iniciar.config(state=tk.NORMAL); self.btn_detener.config(state=tk.DISABLED)
         self.status_label.config(text="Estado: Detenido.")
 
-        # Restaurar panel de estado de IA
         self.status_ia_line1.config(text="Inactivo", fg="#ff5555")
         self.status_ia_line2.config(text="")
 
