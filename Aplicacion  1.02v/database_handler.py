@@ -65,6 +65,12 @@ class DatabaseHandler:
             print(f"❌ Error en consulta: {err}. Consulta: {query[:100]}...")
             return None
 
+    def get_system_update_timestamp(self):
+        """Obtiene la marca de tiempo de la última actualización del sistema."""
+        sql = "SELECT ultima_actualizacion FROM estado_sistema WHERE id = 1"
+        result = self._execute_query(sql, fetch='one', dictionary=True)
+        return result['ultima_actualizacion'] if result else None
+
     def get_all_registered_data(self):
         """Obtiene todos los datos y encodings de las personas registradas para el reconocimiento."""
         sql = """
