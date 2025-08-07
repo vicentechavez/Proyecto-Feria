@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestra Historia - Ojo Digital</title>
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/historia.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+         <nav class="navbar">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/img/logo.png" alt="Ojo Digital Logo" class="logo-image">
+                Ojo Digital
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="servicios.html" class="nav-link">Servicios</a></li>
+                <li class="nav-item"><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li class="nav-item"><a href="historia.html" class="nav-link">Quiénes Somos</a></li>
+                <li class="nav-item"><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-auth">
+                <div id="logged-out-view">
+                    <button id="login-btn" class="btn btn-secondary">Iniciar Sesión</button>
+                    <button id="register-btn" class="btn btn-primary">Registrarse</button>
+                </div>
+                <div id="logged-in-view" style="display: none;">
+                    <span id="user-email-display" class="user-email"></span>
+                    <button id="logout-btn" class="btn btn-primary">Cerrar Sesión</button>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container story-container">
+            <h2>Nuestra <span class="neon-purple">Historia</span>: De la Idea a la <span class="neon-green">Realidad</span></h2>
+            <div class="story-content">
+                <p>Todo comenzó en el vibrante corazón tecnológico de Talagante, en el año 2023. Un grupo de jóvenes apasionados por la inteligencia artificial y la seguridad, liderados por Vicente Chavez, notaron una brecha en el mercado de la vigilancia. Las soluciones existentes eran o demasiado caras y complejas para el usuario promedio, o demasiado básicas para ofrecer una seguridad real. Soñaban con un sistema que fuera a la vez potente, accesible y, sobre todo, respetuoso con la privacidad de las personas.</p>
+                <p>Pasaron meses de noches en vela, alimentados por café y el deseo de innovar. Camilo Jorquera y Valentin Azocar trabajaron codo a codo, diseñando una interfaz que no solo fuera estéticamente agradable con su temática neón, sino también increíblemente intuitiva. Mientras tanto, Alejandra Reyes construía una arquitectura de base de datos robusta y segura, el pilar sobre el que se sostendría todo el sistema.</p>
+                <p>El primer prototipo, apodado "Proyecto Centinela", fue puesto a prueba rigurosamente por Aron Molina, cuyo ojo crítico no dejó pasar ni el más mínimo error. Cada fallo era una oportunidad para mejorar. Pedro Sepulveda documentaba meticulosamente cada avance, creando un manual que sería crucial para el futuro crecimiento del equipo y la plataforma.</p>
+                <p>Finalmente, en 2025, "Ojo Digital" vio la luz. No era solo un software de vigilancia, sino una promesa: la promesa de una seguridad inteligente, proactiva y accesible para todos. Una que no comprometiera la privacidad por la protección. Desde nuestro humilde comienzo en un pequeño garaje en Talagante, hemos crecido, pero nuestra misión sigue siendo la misma: darte la visión para proteger lo que más importa, con la tecnología del mañana, hoy.</p>
+            </div>
+            <div class="gradient-border"></div>
+            
+            <!-- Contenedor para la presentación de Canva -->
+            <div class="canva-embed-container">
+             
+                <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
+                padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+                border-radius: 8px; will-change: transform;">
+                <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                    src="https://www.canva.com/design/DAGvZ1QTVJI/64ncgdgb9PfIAh9dAU_i8g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+                </iframe>
+                </div>
+                <a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGvZ1QTVJI&#x2F;64ncgdgb9PfIAh9dAU_i8g&#x2F;view?utm_content=DAGvZ1QTVJI&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Pedro apresura la presentación</a> de VALENTIN AZOCAR
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="copyright-year">2025</span> Ojo Digital. Tu Visión, Nuestra Misión.</p>
+    </footer>
+    
+    <div id="notification-container"></div>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ojo Digital - Vigilancia Inteligente Profesional</title>
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/inicio.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/img/logo.png" alt="Ojo Digital Logo" class="logo-image">
+                Ojo Digital
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="servicios.html" class="nav-link">Servicios</a></li>
+                <li class="nav-item"><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li class="nav-item"><a href="historia.html" class="nav-link">Quiénes Somos</a></li>
+                <li class="nav-item"><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-auth">
+                <div id="logged-out-view">
+                    <button id="login-btn" class="btn btn-secondary">Iniciar Sesión</button>
+                    <button id="register-btn" class="btn btn-primary">Registrarse</button>
+                </div>
+                <div id="logged-in-view" style="display: none;">
+                    <span id="user-email-display" class="user-email"></span>
+                    <button id="logout-btn" class="btn btn-primary">Cerrar Sesión</button>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Vigilancia <span class="neon-purple">inteligente</span>, protección <span class="neon-green">real</span>.</h1>
+                <p class="tagline">Bienvenido a Ojo Digital, donde la tecnología de punta se une a la tranquilidad. Monitoreo profesional para tu hogar o negocio.</p>
+                <div class="hero-buttons">
+                    <a href="servicios.html" class="btn btn-primary">Ver Planes</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="como-funciona" class="container">
+            <h2>¿Cómo Funciona Ojo Digital?</h2>
+            <p>Simplificamos la vigilancia avanzada. Nuestra plataforma se integra con tus cámaras para analizar eventos en tiempo real, priorizando siempre tu privacidad y seguridad.</p>
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">👁️</div>
+                    <h3>Reconocimiento Inteligente</h3>
+                    <p>Nuestra IA detecta patrones y objetos, diferenciando entre amenazas reales y falsas alarmas para una vigilancia precisa.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Alertas Instantáneas</h3>
+                    <p>Recibe notificaciones inmediatas en tu dispositivo móvil ante cualquier evento relevante, permitiéndote actuar al instante.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Privacidad por Diseño</h3>
+                    <p>No almacenamos grabaciones de forma continua. El sistema analiza y notifica, garantizando que tus datos privados sigan siéndolo.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="copyright-year">2025</span> Ojo Digital. Vigilancia Inteligente para un Mundo Moderno.</p>
+    </footer>
+
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="login-view">
+                <h3>Bienvenido de Nuevo</h3>
+                <p>Ingresa tus credenciales para continuar.</p>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="login-email">Correo Electrónico</label>
+                        <input type="email" id="login-email" name="login-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Contraseña</label>
+                        <input type="password" id="login-password" name="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </form>
+                <p id="form-toggle-login" class="form-toggle-text">¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
+            </div>
+            <div id="register-view" style="display: none;">
+                <h3>Crea tu Cuenta</h3>
+                <p>Únete a Ojo Digital para proteger lo que más importa.</p>
+                <form id="register-form">
+                     <div class="input-group">
+                        <label for="register-email">Correo Electrónico</label>
+                        <input type="email" id="register-email" name="register-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="register-password">Contraseña</label>
+                        <input type="password" id="register-password" name="register-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+                </form>
+                <p id="form-toggle-register" class="form-toggle-text">¿Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="notification-container"></div>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

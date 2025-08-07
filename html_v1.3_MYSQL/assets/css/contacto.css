@@ -1,0 +1,140 @@
+/* ====================================================== */
+/* ||        ESTILOS PARA LA PÁGINA DE CONTACTO        || */
+/* ====================================================== */
+
+/* --- Contenedor de Contacto --- */
+.contact-wrapper {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  background: var(--content-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.contact-form {
+  flex: 2;
+}
+
+.contact-info {
+  flex: 1;
+  text-align: left;
+}
+
+.contact-info h3,
+.contact-info h4 {
+  color: var(--primary-color);
+}
+
+.contact-info p {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* --- Formulario de Contacto --- */
+#main-contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: #10101a;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.contact-form .btn {
+  transition: all 0.3s ease;
+}
+
+/* --- Sección de Equipo --- */
+#our-team {
+  margin-top: 60px;
+}
+
+.pyramid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* Espacio entre filas */
+  margin-top: 40px;
+}
+
+.pyramid-row {
+  display: flex;
+  flex-wrap: wrap; /* Ajuste para pantallas pequeñas */
+  justify-content: center;
+  gap: 30px; /* Espacio entre miembros */
+}
+
+.pyramid-member-card {
+  width: 320px;
+  padding: 25px;
+  background: var(--content-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pyramid-member-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(157, 0, 255, 0.2);
+}
+
+.pyramid-member-card img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 15px;
+  border: 3px solid var(--primary-color);
+  border-radius: 50%;
+}
+
+.pyramid-member-card h3 {
+  font-size: 1.4em;
+  color: var(--heading-color);
+}
+
+.pyramid-member-card .role {
+  margin-top: 5px;
+  color: var(--primary-color);
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.pyramid-member-card .detail {
+  margin-top: 15px;
+  font-size: 0.95em;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* --- Responsive para Contacto --- */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .pyramid-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pyramid-member-card {
+    width: 90%;
+    max-width: 400px;
+  }
+}

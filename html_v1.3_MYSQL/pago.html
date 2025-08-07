@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesar Pago - Ojo Digital</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/pago.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Pantalla de carga -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Verificando...</p>
+    </div>
+
+    <div class="payment-container">
+        <div class="payment-box">
+            <a href="index.html" class="nav-logo" style="justify-content: center; margin-bottom: 20px; text-decoration: none;">
+                <img src="assets/img/logo.png" alt="Ojo Digital Logo" class="logo-image">
+                Ojo Digital
+            </a>
+            <h2 id="payment-title">Contratar Plan</h2>
+            <p class="disclaimer">Estás en un entorno de pago simulado.</p>
+            
+            <form id="payment-form">
+                <div class="input-group">
+                    <label for="card-number">Número de Tarjeta</label>
+                    <input type="text" id="card-number" placeholder="**** **** **** ****" required maxlength="19">
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="expiry-date">Fecha Exp.</label>
+                        <input type="text" id="expiry-date" placeholder="MM/AA" required maxlength="5">
+                    </div>
+                    <div class="input-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required maxlength="3">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="card-name">Nombre en la Tarjeta</label>
+                    <input type="text" id="card-name" placeholder="Nombre Apellido" required maxlength="40">
+                </div>
+
+                <p class="warning-message">
+                    <span class="warning-icon">⚠️</span> No guardaremos esta información. Es solo una simulación.
+                </p>
+
+                <button type="submit" class="btn btn-primary">Pagar Ahora</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/js/pago.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+/* ====================================================== */
+/* ||          ESTILOS PARA PAGO Y GRACIAS             || */
+/* ====================================================== */
+
+/* --- Contenedor Principal --- */
+body.payment-page, body.thank-you-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.payment-container,
+.thank-you-container {
+  width: 100%;
+  padding: 20px;
+}
+
+/* --- Caja de Pago --- */
+.payment-box {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 40px;
+  background: #1e1e2c;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.payment-box h2 {
+  margin-bottom: 10px;
+  font-size: 2em;
+  text-align: center;
+}
+
+.payment-box .disclaimer {
+  margin-bottom: 30px;
+  color: var(--text-color);
+  font-size: 0.9em;
+  text-align: center;
+}
+
+/* --- Formulario de Pago --- */
+#payment-form .input-group {
+  margin-bottom: 20px;
+}
+
+#payment-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-color);
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+#payment-form input {
+  width: 100%;
+  padding: 14px;
+  background: #2a2a3a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#payment-form input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+  outline: none;
+}
+
+.input-row {
+  display: flex;
+  gap: 20px;
+}
+
+.input-row .input-group {
+  flex: 1;
+}
+
+.warning-message {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 12px;
+  background-color: rgba(255, 71, 87, 0.1);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  border-radius: 8px;
+  color: #ff4757; /* Rojo para advertencia */
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.warning-icon {
+  font-size: 1.2em;
+}
+
+#payment-form .btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 15px;
+  font-size: 1.1em;
+}
+
+/* --- Pantalla de Agradecimiento --- */
+.thank-you-box {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 50px;
+  background: #1e1e2c;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.thank-you-box .logo-image {
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.thank-you-box h1 {
+  margin-bottom: 15px;
+  color: var(--heading-color);
+  font-size: 2.5em;
+}
+
+.thank-you-box p {
+  margin-bottom: 30px;
+  font-size: 1.2em;
+}
+
+.thank-you-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-download {
+  background-color: var(--primary-color);
+  color: var(--dark-bg);
+  box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+}
+
+.btn-download:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px var(--primary-color);
+}
+
+.btn-home {
+  background-color: var(--secondary-color);
+  color: var(--heading-color);
+  box-shadow: 0 0 10px rgba(157, 0, 255, 0.5);
+}
+
+.btn-home:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px var(--secondary-color);
+}
+
+/* --- Pantalla de Carga (Spinner) --- */
+.loading-overlay {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(16, 16, 26, 0.9);
+  backdrop-filter: blur(5px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--heading-color);
+  font-size: 1.2em;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  border: 5px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

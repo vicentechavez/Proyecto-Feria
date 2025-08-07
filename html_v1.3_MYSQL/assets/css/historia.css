@@ -1,0 +1,34 @@
+/* ====================================================== */
+/* ||         ESTILOS PARA LA PÁGINA DE HISTORIA       || */
+/* ====================================================== */
+
+.story-container {
+  padding: 40px;
+  background: var(--content-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.story-content p {
+  max-width: 800px;
+  margin-bottom: 25px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.gradient-border {
+  width: 100%;
+  height: 5px;
+  margin: 40px auto;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border-radius: 5px;
+}
+
+/* Estilo para el contenedor de la presentación de Canva */
+.canva-embed-container {
+  margin-top: 20px;
+  width: 100%;
+  /* El código de Canva maneja su propia altura y responsividad,
+     así que solo necesitamos asegurar el espaciado. */
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto y Equipo - Ojo Digital</title>
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/contacto.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/img/logo.png" alt="Ojo Digital Logo" class="logo-image">
+                Ojo Digital
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="servicios.html" class="nav-link">Servicios</a></li>
+                <li class="nav-item"><a href="galeria.html" class="nav-link">Galería</a></li>
+                <li class="nav-item"><a href="historia.html" class="nav-link">Quiénes Somos</a></li>
+                <li class="nav-item"><a href="contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="nav-auth">
+                <div id="logged-out-view">
+                    <button id="login-btn" class="btn btn-secondary">Iniciar Sesión</button>
+                    <button id="register-btn" class="btn btn-primary">Registrarse</button>
+                </div>
+                <div id="logged-in-view" style="display: none;">
+                    <span id="user-email-display" class="user-email"></span>
+                    <button id="logout-btn" class="btn btn-primary">Cerrar Sesión</button>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="container">
+            <h2><span class="neon-green">Contacta</span> con Nosotros</h2>
+             <p>¿Tienes alguna pregunta? Nuestro equipo está listo para ayudarte.</p>
+            <div class="contact-wrapper">
+                <div class="contact-form">
+                    <form id="main-contact-form">
+                        <input type="text" name="name" placeholder="Tu nombre completo" aria-label="Tu nombre completo" required />
+                        <input type="email" name="email" placeholder="Tu correo electrónico" aria-label="Tu correo electrónico" required />
+                        <textarea name="message" placeholder="Escribe tu mensaje aquí..." rows="6" aria-label="Escribe tu mensaje aquí" required></textarea>
+                        <button class="btn btn-primary" type="submit">Enviar Mensaje</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <p><strong>📧 Correo:</strong> <a href="mailto:info@ojodigital.tech">info@ojodigital.tech</a></p>
+                    <p><strong>📞 Teléfono:</strong> +56 2 9876 5432</p>
+                    <p><strong>📍 Dirección:</strong> Calle de la Innovación 789, Talagante, Chile.</p>
+                    <h4>Horario de Atención</h4>
+                    <p>Lunes a Viernes: 9:00 - 18:00</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="our-team" class="container">
+            <h2>Nuestro <span class="neon-purple">Equipo</span></h2>
+            <p>Los profesionales apasionados por la tecnología y la seguridad que hacen posible Ojo Digital.</p>
+            <div class="pyramid-container">
+                <div class="pyramid-row">
+                    <div class="pyramid-member-card">
+                        <img src="assets/img/VC.png" alt="Foto de Vicente Chavez">
+                        <h3>Vicente Chavez</h3>
+                        <p class="role">Líder del Equipo</p>
+                        <p class="detail">Coordina al equipo, define los objetivos y asegura que se cumplan los plazos. Supervisa el progreso y actúa como enlace principal.</p>
+                    </div>
+                </div>
+                <div class="pyramid-row">
+                    <div class="pyramid-member-card">
+                        <img src="assets/img/CJ.png" alt="Foto de Camilo Jorquera">
+                        <h3>Camilo Jorquera</h3>
+                        <p class="role">Diseñador UX/UI</p>
+                        <p class="detail">Crea el diseño visual y la estructura de la interfaz. Asegura una experiencia de usuario intuitiva y atractiva.</p>
+                    </div>
+                    <div class="pyramid-member-card">
+                        <img src="assets/img/VA.png" alt="Foto de Valentin Azocar">
+                        <h3>Valentin Azocar</h3>
+                        <p class="role">Desarrollador Frontend</p>
+                        <p class="detail">Diseña y programa la interfaz de usuario usando HTML, CSS y JavaScript, enfocándose en la funcionalidad visual.</p>
+                    </div>
+                </div>
+                <div class="pyramid-row">
+                    <div class="pyramid-member-card">
+                        <img src="assets/img/AM.png" alt="Foto de Aron Molina">
+                        <h3>Aron Molina</h3>
+                        <p class="role">Tester / QA</p>
+                        <p class="detail">Prueba el sistema para encontrar errores y asegurar que todo funcione correctamente. Define casos de prueba y documenta fallos.</p>
+                    </div>
+                    <div class="pyramid-member-card">
+                        <img src="assets/img/PS.png" alt="Foto de Pedro Sepulveda">
+                        <h3>Pedro Sepulveda</h3>
+                        <p class="role">Documentador</p>
+                        <p class="detail">Se encarga de redactar y organizar la documentación técnica y funcional del proyecto, facilitando su comprensión.</p>
+                    </div>
+                    <div class="pyramid-member-card">
+                        <img src="assets/img/AR.png" alt="Foto de Alejandra Reyes">
+                        <h3>Alejandra Reyes</h3>
+                        <p class="role">Administradora de BD</p>
+                        <p class="detail">Diseña, implementa y mantiene la base de datos del proyecto, encargándose de la integridad y optimización de los datos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="copyright-year">2025</span> Ojo Digital. La Protección que Mereces.</p>
+    </footer>
+
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="login-view">
+                <h3>Bienvenido de Nuevo</h3>
+                <p>Ingresa tus credenciales para continuar.</p>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="login-email">Correo Electrónico</label>
+                        <input type="email" id="login-email" name="login-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Contraseña</label>
+                        <input type="password" id="login-password" name="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </form>
+                <p id="form-toggle-login" class="form-toggle-text">¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
+            </div>
+            <div id="register-view" style="display: none;">
+                <h3>Crea tu Cuenta</h3>
+                <p>Únete a Ojo Digital para proteger lo que más importa.</p>
+                <form id="register-form">
+                     <div class="input-group">
+                        <label for="register-email">Correo Electrónico</label>
+                        <input type="email" id="register-email" name="register-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="register-password">Contraseña</label>
+                        <input type="password" id="register-password" name="register-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+                </form>
+                <p id="form-toggle-register" class="form-toggle-text">¿Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="notification-container"></div>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

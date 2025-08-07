@@ -1,0 +1,7 @@
+azzokavvalent@gmail.com
+vvwwallent0777
+
+Para funcionar, mover la carpeta a:
+C:\xampp\htdocs\html_v1.3_MYSQL
+Y pegar esta url
+http://localhost/html_v1.3_MYSQL/
