@@ -1,0 +1,5 @@
+Importante
+
+crear 2 carpetas de html MySQL
+1) seguir puliendo en liceo (html_v1.XL_MYSQL)
+2) seguir puliendo desde casa (html_v1.XC_MYSQL)
