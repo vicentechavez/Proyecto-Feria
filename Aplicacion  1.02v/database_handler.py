@@ -109,27 +109,35 @@ class DatabaseHandler:
         return self._execute_query(sql, fetch='all', dictionary=True)
 
     def register_person(self, nombre, fecha_nac, edad, rut, relacion, fecha_reg, img_data, encoding_data):
-        """Registra una nueva persona en la base de datos."""
+        """Registra una nueva persona en la base de datos y actualiza el estado del sistema."""
         sql_img = "INSERT INTO imagenes_reconocimiento (imagen_data, encoding_data) VALUES (%s, %s)"
         id_imagen = self._execute_query(sql_img, (img_data, encoding_data))
 
         sql_rec = "INSERT INTO reconocimiento (nombre_completo, fecha_nacimiento, edad, rut, relacion, fecha_registro, id_imagen) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         self._execute_query(sql_rec, (nombre, fecha_nac, edad, rut, relacion, fecha_reg, id_imagen))
+        
+        self.update_system_status() # FIX: Notificar a otros clientes del cambio
 
     def update_person(self, id_imagen, nombre, fecha_nac, edad, relacion):
-        """Actualiza los datos de una persona existente."""
+        """Actualiza los datos de una persona existente y actualiza el estado del sistema."""
         sql = "UPDATE reconocimiento SET nombre_completo = %s, fecha_nacimiento = %s, edad = %s, relacion = %s WHERE id_imagen = %s"
         self._execute_query(sql, (nombre, fecha_nac, edad, relacion, id_imagen))
+        
+        self.update_system_status() # FIX: Notificar a otros clientes del cambio
 
     def delete_person(self, id_imagen):
-        """Elimina a una persona y su imagen asociada. La FK en la BD se encarga del resto."""
+        """Elimina a una persona y su imagen asociada, y actualiza el estado del sistema."""
         sql = "DELETE FROM imagenes_reconocimiento WHERE id = %s"
         self._execute_query(sql, (id_imagen,))
+        
+        self.update_system_status() # FIX: Notificar a otros clientes del cambio
 
     def delete_suspect(self, id_sospechoso):
-        """Elimina una foto de un sospechoso."""
+        """Elimina una foto de un sospechoso y actualiza el estado del sistema."""
         sql = "DELETE FROM sospechosos WHERE id = %s"
         self._execute_query(sql, (id_sospechoso,))
+        
+        self.update_system_status() # FIX: Notificar a otros clientes del cambio
 
     def log_recognition(self, nombre, rut, dispositivo):
         """Registra un evento de reconocimiento en el historial."""
