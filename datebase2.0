@@ -1,0 +1,368 @@
+# database_handler.py
+# Este módulo gestiona todas las interacciones con las bases de datos.
+
+import mysql.connector
+from mysql.connector import Error
+import numpy as np
+
+class DatabaseHandler:
+    def __init__(self, db_config):
+        """
+        Inicializa la conexión a la base de datos principal (ojodigital).
+        """
+        self.db_config = db_config
+        self.connection = None
+        self.reconnect()
+
+    def _get_casino_db_connection(self):
+        """
+        Establece y devuelve una conexión a la base de datos del casino.
+        """
+        casino_db_config = {
+            'host': '192.168.1.139',
+            'user': 'Casino',
+            'password': 'casino123',
+            'database': 'casinodb',
+            'port': 3306
+        }
+        try:
+            return mysql.connector.connect(**casino_db_config)
+        except Error as e:
+            print(f"❌ Error al conectar con la base de datos 'casinodb': {e}")
+            return None
+
+    def reconnect(self):
+        """
+        Establece o restablece la conexión a la base de datos principal.
+        """
+        try:
+            if self.connection and self.connection.is_connected():
+                self.connection.close()
+            
+            self.connection = mysql.connector.connect(**self.db_config)
+            print("✅ Conexión exitosa a la base de datos 'ojodigital'.")
+        except Error as e:
+            print(f"❌ Error al conectar con la base de datos 'ojodigital': {e}")
+            self.connection = None
+            raise e
+
+    def close(self):
+        if self.connection and self.connection.is_connected():
+            self.connection.close()
+            print("🔌 Conexión a 'ojodigital' cerrada.")
+
+    def register_person(self, nombre, fecha_nac, edad, rut, relacion, fecha_reg, img_data, encoding_data, casino_info):
+        """
+        Registra una nueva persona en 'ojodigital' y en 'casinodb' con información adicional.
+        'casino_info' es un diccionario que contiene: direccion, id_comuna, id_banco, password.
+        """
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+
+        cursor = self.connection.cursor()
+        try:
+            sql_insert_image = "INSERT INTO imagenes_reconocimiento (imagen_data, encoding_data) VALUES (%s, %s)"
+            cursor.execute(sql_insert_image, (img_data, encoding_data))
+            id_imagen_nueva = cursor.lastrowid
+            
+            sql_insert_person = """
+                INSERT INTO reconocimiento (nombre_completo, fecha_nacimiento, edad, rut, relacion, fecha_registro, id_imagen)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql_insert_person, (nombre, fecha_nac, edad, rut, relacion, fecha_reg, id_imagen_nueva))
+            
+            self.connection.commit()
+            print(f"👤 Usuario '{nombre}' registrado exitosamente en 'ojodigital'.")
+            self.update_system_timestamp()
+
+            self._add_user_to_casino_db(nombre, rut, casino_info)
+
+        except Error as e:
+            print(f"❌ Error durante el registro: {e}")
+            self.connection.rollback()
+            raise e
+        finally:
+            cursor.close()
+
+    def _add_user_to_casino_db(self, nombre, rut, casino_info):
+        """
+        Añade el usuario a la base de datos del casino con datos extendidos.
+        """
+        casino_conn = self._get_casino_db_connection()
+        if not casino_conn: return
+
+        try:
+            cursor_casino = casino_conn.cursor()
+            sql_casino = """
+                INSERT INTO usuarios (usuario, rut, saldo, tipo_moneda, direccion, id_comuna, id_banco, contrasena) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            saldo_inicial = 2500
+            tipo_moneda_default = 'CLP'
+            
+            # --- CORRECCIÓN: Se guarda la contraseña sin encriptar ---
+            password = casino_info['password']
+            
+            rut_casino_format = rut.replace(".", "")
+
+            cursor_casino.execute(sql_casino, (
+                nombre, rut_casino_format, saldo_inicial, tipo_moneda_default,
+                casino_info['direccion'], casino_info['id_comuna'], casino_info['id_banco'],
+                password # Se guarda la contraseña directamente
+            ))
+            casino_conn.commit()
+            print(f"💰 Usuario '{nombre}' agregado a 'casinodb' con datos completos.")
+        except Error as e:
+            print(f"❌ Error al registrar usuario en 'casinodb': {e}")
+            if casino_conn: casino_conn.rollback()
+        finally:
+            if casino_conn and casino_conn.is_connected():
+                cursor_casino.close()
+                casino_conn.close()
+
+    def get_casino_comunas(self):
+        """Obtiene la lista de comunas de la base de datos del casino."""
+        casino_conn = self._get_casino_db_connection()
+        if not casino_conn: return {}
+        
+        comunas = {}
+        try:
+            cursor = casino_conn.cursor()
+            cursor.execute("SELECT id_comuna, nombre_comuna FROM comunas ORDER BY nombre_comuna")
+            for id_comuna, nombre in cursor.fetchall():
+                comunas[nombre] = id_comuna
+        except Error as e:
+            print(f"Error al obtener comunas: {e}")
+        finally:
+            if casino_conn.is_connected():
+                cursor.close()
+                casino_conn.close()
+        return comunas
+
+    def get_casino_bancos(self):
+        """Obtiene la lista de bancos de la base de datos del casino."""
+        casino_conn = self._get_casino_db_connection()
+        if not casino_conn: return {}
+
+        bancos = {}
+        try:
+            cursor = casino_conn.cursor()
+            cursor.execute("SELECT id_banco, nombre_banco FROM bancos ORDER BY nombre_banco")
+            for id_banco, nombre in cursor.fetchall():
+                bancos[nombre] = id_banco
+        except Error as e:
+            print(f"Error al obtener bancos: {e}")
+        finally:
+            if casino_conn.is_connected():
+                cursor.close()
+                casino_conn.close()
+        return bancos
+
+    def get_casino_user_details(self, rut):
+        """Obtiene los detalles adicionales de un usuario de la DB del casino."""
+        casino_conn = self._get_casino_db_connection()
+        if not casino_conn: return None
+        
+        details = None
+        try:
+            cursor = casino_conn.cursor(dictionary=True)
+            rut_casino_format = rut.replace(".", "")
+            cursor.execute("SELECT direccion, id_comuna, id_banco, saldo FROM usuarios WHERE rut = %s", (rut_casino_format,))
+            details = cursor.fetchone()
+        except Error as e:
+            print(f"Error al obtener detalles del usuario del casino: {e}")
+        finally:
+            if casino_conn.is_connected():
+                cursor.close()
+                casino_conn.close()
+        return details
+
+    def update_casino_user_details(self, rut, direccion, id_comuna, id_banco, new_password=None):
+        """Actualiza los detalles de un usuario en la DB del casino."""
+        casino_conn = self._get_casino_db_connection()
+        if not casino_conn: return
+
+        try:
+            cursor = casino_conn.cursor()
+            rut_casino_format = rut.replace(".", "")
+
+            sql = "UPDATE usuarios SET direccion = %s, id_comuna = %s, id_banco = %s WHERE rut = %s"
+            cursor.execute(sql, (direccion, id_comuna, id_banco, rut_casino_format))
+            
+            if new_password:
+                # --- CORRECCIÓN: Se guarda la nueva contraseña sin encriptar ---
+                sql_pass = "UPDATE usuarios SET contrasena = %s WHERE rut = %s"
+                cursor.execute(sql_pass, (new_password, rut_casino_format))
+
+            casino_conn.commit()
+            print(f"Datos del casino actualizados para el RUT {rut}.")
+        except Error as e:
+            print(f"Error al actualizar datos del casino: {e}")
+            if casino_conn: casino_conn.rollback()
+        finally:
+            if casino_conn.is_connected():
+                cursor.close()
+                casino_conn.close()
+
+    def check_rut_exists(self, rut):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("SELECT COUNT(*) FROM reconocimiento WHERE rut = %s", (rut,))
+            return cursor.fetchone()[0] > 0
+        finally:
+            cursor.close()
+
+    def get_all_registered_data(self):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor(dictionary=True)
+        datos_registrados = {}
+        encodings_registrados = {}
+        try:
+            sql = """
+                SELECT r.nombre_completo, r.edad, r.rut, r.fecha_nacimiento, r.relacion, r.fecha_registro, ir.encoding_data
+                FROM reconocimiento r
+                JOIN imagenes_reconocimiento ir ON r.id_imagen = ir.id
+            """
+            cursor.execute(sql)
+            for row in cursor.fetchall():
+                nombre = row['nombre_completo']
+                datos_registrados[nombre] = {
+                    'edad': row['edad'],
+                    'rut': row['rut'],
+                    'fecha_nacimiento': row['fecha_nacimiento'].strftime('%Y-%m-%d'),
+                    'relacion': row['relacion'],
+                    'fecha_registro': row['fecha_registro'].strftime('%Y-%m-%d')
+                }
+                if row['encoding_data']:
+                    encodings_registrados[nombre] = np.frombuffer(row['encoding_data'], dtype=np.float64)
+        finally:
+            cursor.close()
+        return datos_registrados, encodings_registrados
+
+    def get_data_for_admin_panel(self):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor(dictionary=True)
+        try:
+            cursor.execute("SELECT id, id_imagen, nombre_completo, rut, fecha_nacimiento, edad, relacion, fecha_registro FROM reconocimiento")
+            return cursor.fetchall()
+        finally:
+            cursor.close()
+
+    def delete_person(self, person_id, image_id):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("DELETE FROM reconocimiento WHERE id = %s", (person_id,))
+            cursor.execute("DELETE FROM imagenes_reconocimiento WHERE id = %s", (image_id,))
+            self.connection.commit()
+            self.update_system_timestamp()
+        finally:
+            cursor.close()
+
+    def update_person(self, person_id, nombre, fecha_nac, edad, relacion):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            sql = """
+                UPDATE reconocimiento SET nombre_completo=%s, fecha_nacimiento=%s, edad=%s, relacion=%s 
+                WHERE id=%s
+            """
+            cursor.execute(sql, (nombre, fecha_nac, edad, relacion, person_id))
+            self.connection.commit()
+            self.update_system_timestamp()
+        finally:
+            cursor.close()
+            
+    def log_recognition(self, nombre, rut, device_hostname):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            sql = "INSERT INTO historial_reconocimiento (nombre, rut, fecha_hora, dispositivo_id) VALUES (%s, %s, NOW(), %s)"
+            cursor.execute(sql, (nombre, rut, device_hostname))
+            self.connection.commit()
+        finally:
+            cursor.close()
+
+    def log_suspect(self, image_data, device_hostname):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            sql = "INSERT INTO sospechosos (imagen_data, dispositivo_id) VALUES (%s, %s)"
+            cursor.execute(sql, (image_data, device_hostname))
+            self.connection.commit()
+        finally:
+            cursor.close()
+
+    def get_recognition_history(self):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor(dictionary=True)
+        try:
+            cursor.execute("SELECT fecha_hora, nombre, rut, dispositivo_id FROM historial_reconocimiento ORDER BY fecha_hora DESC")
+            return cursor.fetchall()
+        finally:
+            cursor.close()
+
+    def get_suspects(self):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor(dictionary=True)
+        try:
+            cursor.execute("SELECT id, fecha_hora, imagen_data, dispositivo_id FROM sospechosos ORDER BY fecha_hora DESC")
+            return cursor.fetchall()
+        finally:
+            cursor.close()
+
+    def delete_suspect(self, suspect_id):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("DELETE FROM sospechosos WHERE id = %s", (suspect_id,))
+            self.connection.commit()
+        finally:
+            cursor.close()
+
+    def get_suspect_count(self):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("SELECT COUNT(*) FROM sospechosos")
+            return cursor.fetchone()[0]
+        finally:
+            cursor.close()
+            
+    def get_registered_person_photos(self):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor(dictionary=True)
+        try:
+            sql = """
+                SELECT r.nombre_completo, ir.imagen_data
+                FROM reconocimiento r
+                JOIN imagenes_reconocimiento ir ON r.id_imagen = ir.id
+            """
+            cursor.execute(sql)
+            return cursor.fetchall()
+        finally:
+            cursor.close()
+
+    def get_system_update_timestamp(self):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("SELECT ultima_actualizacion FROM estado_sistema WHERE id = 1")
+            result = cursor.fetchone()
+            return result[0] if result else None
+        except mysql.connector.ProgrammingError:
+            print("Advertencia: La tabla 'estado_sistema' para sincronización no fue encontrada.")
+            return None
+        finally:
+            cursor.close()
+
+    def update_system_timestamp(self):
+        if not self.connection or not self.connection.is_connected(): self.reconnect()
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("INSERT INTO estado_sistema (id) VALUES (1) ON DUPLICATE KEY UPDATE ultima_actualizacion = NOW()")
+            self.connection.commit()
+        except Error as e:
+            print(f"No se pudo actualizar el timestamp del sistema: {e}")
+        finally:
+            cursor.close()
